@@ -1,0 +1,643 @@
+activa 1 2 8
+dup
+apila 0
+opbinaria +
+apila 0
+desapilaind
+desapilad 1
+ira 26
+activa 1 1 11
+desapilad 1
+ira 118
+apila Listado de nombres ordenado
+imprime
+endl
+apila ---------------------------
+imprime
+endl
+activa 1 1 25
+dup
+apila 0
+opbinaria +
+apila 51
+mueve 1
+desapilad 1
+ira 157
+stop 
+apila Introduce el nÃºmero de nombres a ordenar (max 50): 
+imprime
+endl
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 50
+opbinaria +
+escanea int
+desapilaind
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 50
+opbinaria +
+apilaind
+apila 0
+opbinaria <
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 50
+opbinaria +
+apilaind
+apila 50
+opbinaria >
+opbinaria or
+irf 69
+apila Introduce el nÃºmero de nombres a ordenar (max 50): 
+imprime
+endl
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 50
+opbinaria +
+escanea int
+desapilaind
+ira 37
+apilad 1
+apila 1
+opbinaria +
+apila 0
+desapilaind
+apila Introduce un nombre en cada lÃ­nea: 
+imprime
+endl
+apilad 1
+apila 1
+opbinaria +
+apilaind
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 50
+opbinaria +
+apilaind
+opbinaria <
+irf 116
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 0
+opbinaria +
+apilad 1
+apila 1
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+escanea str
+desapilaind
+apilad 1
+apila 1
+opbinaria +
+apilad 1
+apila 1
+opbinaria +
+apilaind
+apila 1
+opbinaria +
+desapilaind
+ira 77
+desactiva 1 2
+irind
+apila 51
+apila -1
+desapilaind
+apilad 1
+apila 0
+opbinaria +
+apila 0
+desapilaind
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 0
+apila 50
+opbinaria +
+apilaind
+opbinaria <
+irf 155
+activa 2 4 144
+dup
+apila 0
+opbinaria +
+apila 51
+desapilaind
+desapilad 2
+ira 216
+apilad 1
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria +
+desapilaind
+ira 126
+desactiva 1 1
+irind
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila -1
+opbinaria !=
+irf 214
+activa 1 1 182
+dup
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 176
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+mueve 1
+desapilad 1
+ira 157
+apilad 1
+apila 0
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 190
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apilaind
+imprime
+endl
+activa 1 1 214
+dup
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 208
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+mueve 1
+desapilad 1
+ira 157
+desactiva 1 1
+irind
+apilad 2
+apila 0
+opbinaria +
+apilaind
+apilaind
+apila -1
+opbinaria ==
+irf 282
+apilad 2
+apila 0
+opbinaria +
+apilaind
+alloc 3
+desapilaind
+apilad 2
+apila 0
+opbinaria +
+apilaind
+dup
+apila -1
+opbinaria ==
+irf 239
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+mueve 1
+apilad 2
+apila 0
+opbinaria +
+apilaind
+dup
+apila -1
+opbinaria ==
+irf 262
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+apila -1
+desapilaind
+apilad 2
+apila 0
+opbinaria +
+apilaind
+dup
+apila -1
+opbinaria ==
+irf 276
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+apila -1
+desapilaind
+ira 641
+apilad 2
+apila 3
+opbinaria +
+apila false
+desapilaind
+apilad 2
+apila 1
+opbinaria +
+apila -1
+desapilaind
+apilad 2
+apila 2
+opbinaria +
+apilad 2
+apila 0
+opbinaria +
+apilaind
+mueve 1
+apilad 2
+apila 3
+opbinaria +
+apilaind
+opunaria not
+irf 438
+apilad 2
+apila 1
+opbinaria +
+apilad 2
+apila 2
+opbinaria +
+mueve 1
+apilad 2
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 321
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apilaind
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+apilaind
+opbinaria <
+irf 354
+apilad 2
+apila 2
+opbinaria +
+apilad 2
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 349
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+mueve 1
+ira 394
+apilad 2
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 362
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apilaind
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+apilaind
+opbinaria >
+irf 394
+apilad 2
+apila 2
+opbinaria +
+apilad 2
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 390
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+mueve 1
+apilad 2
+apila 2
+opbinaria +
+apilaind
+apila -1
+opbinaria ==
+irf 407
+apilad 2
+apila 3
+opbinaria +
+apila true
+desapilaind
+ira 437
+apilad 2
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 415
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apilaind
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+apilaind
+opbinaria ==
+irf 437
+apilad 2
+apila 3
+opbinaria +
+apila true
+desapilaind
+ira 300
+apilad 2
+apila 2
+opbinaria +
+apilaind
+apila -1
+opbinaria ==
+irf 641
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 453
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apilaind
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+apilaind
+opbinaria <
+irf 556
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 478
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+alloc 3
+desapilaind
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 491
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 499
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+mueve 1
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 521
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 529
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+apila -1
+desapilaind
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 542
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 550
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+apila -1
+desapilaind
+ira 641
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 564
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+alloc 3
+desapilaind
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 577
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 585
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 0
+opbinaria +
+apila 0
+apila 0
+opbinaria +
+apilad 1
+apila 0
+opbinaria +
+apilaind
+apila 1
+opbinaria *
+opbinaria +
+mueve 1
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 607
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 615
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+apila -1
+desapilaind
+apilad 2
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 628
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 1
+opbinaria +
+dup
+apila -1
+opbinaria ==
+irf 636
+stop [ERROR] Intento de acceso a través de null
+apilaind
+apila 2
+opbinaria +
+apila -1
+desapilaind
+desactiva 2 4
+irind
