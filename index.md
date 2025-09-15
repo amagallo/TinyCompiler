@@ -3,7 +3,7 @@
 **Welcome!** 👋 This project implements a full **compiler toolchain** for **Tiny**, a procedural programming language, together with a custom **stack-based virtual machine (P-code machine)** for program execution. The project demonstrates both compiler construction techniques and low-level systems programming for stack-based virtual machines.
 
 ## 🚀 Project Highlights
-- Complete compilation pipeline: lexical analysis, parsing, binding, typing, memory assignment, and code generation.  
+- Complete **compilation pipeline**: lexical analysis, parsing, binding, typing, memory assignment, and code generation.  
 - **Abstract Syntax Tree** (AST) modeled in Java 17 with records and interfaces.  
 - Reflection-based **dispatcher** with memoization for efficient processing.  
 - Robust **code generation** for structured control flow, types, and procedures.  
