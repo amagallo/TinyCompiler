@@ -18,3 +18,8 @@ You can find the full source code, documentation, and examples here:
 ## 📝 License
 This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.  
 See the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors
+- Félix Rodolfo Díaz Lorente
+- Álvaro Magalló Paz
+- Alejandro del Río Caballero
