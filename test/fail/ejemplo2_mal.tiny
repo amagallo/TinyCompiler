@@ -1,0 +1,72 @@
+type Ent: int;
+type Entero: Ent;
+type tLista: array [5] of Entero;
+var i: Entero;
+var k: Entero;
+var k1: Entero;
+var r: Entero;
+var miLista:tLista;
+
+proc incrementAdd(lista:tLista,var i:Entero)
+var j: Entero;
+var k: Entero;
+begin
+ j = 0;
+ while j < 5 do
+  k = lista[j] + i;
+  miLista[j] = k;
+  r = r + k;
+  j = j + 1;
+ end;
+end;
+
+proc rellenaLista(lista:tLista, var mult:Entero, var div:Entero)
+var j: bool;
+begin
+j = 0;
+miLista[j] = j*mult-div;
+j = j + 1;
+end;
+
+proc escribeLista(lista:tLista)
+var j: Entero;
+var k: real;
+begin
+k = 0;
+j = 0;
+while j < 5 do
+k = lista[j];
+write k;
+write ',';
+j = j + 1;
+end;
+nl;
+end;
+
+begin
+i = 3;
+r = 0;
+k = 2;
+
+rellenaLista(miLista, i, k);
+escribeLista(miLista);
+
+k = 0;
+incrementAdd(miLista, k);
+
+escribeLista(miLista);
+write r; nl;
+incrementAdd(miLista, i);
+escribeLista(miLista);
+write r; nl;
+r = 5.7;
+k = 7;
+k1 = 3;
+rellenaLista(miLista, k, k1);
+escribeLista(miLista);
+
+k = -12;
+incrementAdd(miLista, k);
+escribeLista(miLista);
+write r; nl;
+end.

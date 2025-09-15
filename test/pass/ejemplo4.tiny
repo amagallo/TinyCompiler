@@ -1,0 +1,172 @@
+type B:bool;
+
+type reg: record
+    num: int;
+    es_mult: B;
+end;
+
+type tArray: array [5] of ^reg;
+
+type data: record
+    lista: tArray;
+    base: int;
+end;
+
+var miData: data;
+var i: int;
+var introducido: int;
+
+proc verData(var miData: data)
+    var i: int;
+    begin
+        i = 0;
+        nl;
+        write 'Base --->'; 
+        write miData.base; nl; nl;
+        write 'Lista'; nl;
+        while i < 5 do
+            write 'Elemento ---->';
+            write miData.lista[i]^.num; nl;
+            if not miData.lista[i]^.es_mult then
+                write 'No es multiplo';
+            else
+                write 'Si es multiplo';
+            end;
+            nl;
+            nl;
+            i = i + 1;
+        end;
+    end;
+
+
+proc checkMult(num: int, base: int, var es_mult: B)
+    begin 
+        if not ((num % base) == 0) then
+            es_mult = false;
+        else
+            es_mult = true;
+        end;
+    end;
+
+proc sumToData(var miData: data, cant: int)
+    var i: int;
+    begin
+        i = 0;
+        while i < 5 do
+            miData.lista[i]^.num = miData.lista[i]^.num + cant;
+            checkMult(miData.lista[i]^.num, miData.base, miData.lista[i]^.es_mult);
+            i = i + 1;
+        end;
+    end;
+
+proc multData(var miData: data, cant: int)
+    var i: int;
+    begin
+        i = 0;
+        while i < 5 do
+            miData.lista[i]^.num = miData.lista[i]^.num * cant;
+            checkMult(miData.lista[i]^.num, miData.base, miData.lista[i]^.es_mult);
+            i = i + 1;
+        end;
+    end;
+
+proc correctData(var miData: data)
+    var i: int;
+    var resto: int;
+    begin
+        i = 0;
+        while i < 5 do
+            resto = miData.lista[i]^.num % miData.base;
+            miData.lista[i]^.num = miData.lista[i]^.num - resto;
+            checkMult(miData.lista[i]^.num, miData.base, miData.lista[i]^.es_mult);
+            i = i + 1;
+        end;
+    end;
+
+proc changeBase(var miData: data, num: int)
+    var i: int;
+    begin
+        i = 0;
+        miData.base = num;
+        while i < 5 do
+            checkMult(miData.lista[i]^.num, miData.base, miData.lista[i]^.es_mult);
+            i = i + 1;
+        end;
+    end;
+
+proc rellenaData(var miData: data)
+    var i: int;
+    begin
+        i = 0;
+        miData.base = 1;
+        while i < 5 do
+            if miData.lista[i] != null then
+                delete miData.lista[i];
+            end;
+            new miData.lista[i];
+            miData.lista[i]^.num = i;
+            checkMult(miData.lista[i]^.num, miData.base, miData.lista[i]^.es_mult);
+            i = i + 1;
+        end;
+    end;
+
+proc inicializa(var miData: data)
+    var i: int;
+    begin
+        i = 0;
+        while i < 5 do
+            miData.lista[i] = null;
+            i = i + 1;
+        end;
+    end;
+
+proc escribeMsg(var i: int)
+    begin
+        i = -2;
+        while not (((i > -2) and (i <= 6)) and not (i == 0)) do
+            write 'Introduzca una accion'; nl;
+            write '1.- Mostrar datos'; nl;
+            write '2.- Cambiar base'; nl;
+            write '3.- Sumar numero a los datos'; nl;
+            write '4.- Multiplicar numero por los datos'; nl;
+            write '5.- Corregir datos de forma que todos los elementos sean multiplos de la base'; nl;
+            write '6.- Reiniciar lista'; nl;
+            write '(-1).- Salir'; nl;
+            read i;
+        end;
+    end;
+
+begin
+    write 'Bienvenido al programa de prueba 4. Este programa mostrara si los numeros de una lista son multiplos de una base. Tambien se permitiran acciones extra'; nl;
+    nl;
+    inicializa(miData);
+    rellenaData(miData);
+    escribeMsg(i);
+    while i != -1 do
+        if i == 1 then
+            verData(miData);
+        end;
+        if i == 2 then
+            write 'Introduce un int para la nueva base'; nl;
+            read introducido;
+            changeBase(miData, introducido);
+        end;
+        if i == 3 then
+            write 'Introduce un int para sumar'; nl;
+            read introducido;
+            sumToData(miData, introducido);
+        end;
+        if i == 4 then
+            write 'Introduce un int para multiplicar'; nl;
+            read introducido;
+            multData(miData, introducido);
+        end;
+        if i == 5 then
+            correctData(miData);
+        end;
+        if i == 6 then
+            rellenaData(miData);
+        end;
+        escribeMsg(i);
+    end;
+end.

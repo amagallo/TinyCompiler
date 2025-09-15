@@ -1,0 +1,28 @@
+
+
+var cuadrados: array [100] of int;
+var i: int;
+
+proc readNumber()
+ begin
+ i = -2;
+ while ((i < -1) or (i > 99)) do
+ write 'Introduce un nuemro del 0 al 99 para descubrir su cuadrado. Introduce -1 para finalizar'; nl;
+ read i;
+ end;
+ end;
+
+
+begin
+ i = 0;
+ while i < 100 do
+  cuadrados[i] = i*i;
+  i = i + 1;
+ end;
+ readNumber();
+ while i != -1 do 
+  write cuadrados[i]; nl;
+  readNumber();
+  end;
+ end.
+

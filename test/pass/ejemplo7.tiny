@@ -1,0 +1,117 @@
+
+var e1: int;
+var e2: int;
+var r1: real;
+var r2: real;
+var i: int;
+
+proc read2Real()
+    begin
+    write 'Introduce el primer numero'; nl;
+    read r1;
+    write 'Introduce el segundo numero'; nl;
+    read r2;
+    end;
+
+proc read1Real()
+    begin
+    write 'Introduce el numero'; nl;
+    read r1;
+    end;
+
+
+proc read2Int()
+    begin
+    write 'Introduce el primer entero'; nl;
+    read e1;
+    write 'Introduce el segundo entero'; nl;
+    read e2;
+    end;
+
+proc suma(r1:real, r2:real)
+    begin
+    write 'RESULTADO: '; nl;
+    write (r1 + r2); nl; nl;
+    end;
+
+proc resta(r1:real, r2:real)
+    begin
+    write 'RESULTADO: '; nl;
+    write (r1 - r2); nl; nl;
+    end;
+
+proc mult(r1:real, r2:real)
+    begin
+    write 'RESULTADO: '; nl;
+    write (r1 * r2); nl; nl;
+    end;
+
+proc divEnt(e1:int, e2:int)
+    begin
+    write 'RESULTADO: '; nl;
+    write (e1 / e2); nl; nl;
+    end;
+
+proc divReal(r1:real, r2:real)
+    begin
+    write 'RESULTADO: '; nl;
+    write (r1 / r2); nl; nl;
+    end;
+
+
+proc inv(r1:real)
+    begin
+    write 'RESULTADO: '; nl;
+    write (- r1); nl; nl;
+    end;
+
+
+proc escribeMsg(var i: int)
+    begin
+        i = -2;
+        while not (((i > -2) and (i <= 6)) and not (i == 0)) do
+            write 'Introduzca una accion'; nl;
+            write '1.- Sumar'; nl;
+            write '2.- Restar'; nl;
+            write '3.- Multiplicar'; nl;
+            write '4.- Division entera'; nl;
+            write '5.- Division real'; nl;
+            write '6.- Hallar opuesto'; nl;
+            write '(-1).- Salir'; nl;
+            read i;
+        end;
+    end;
+
+begin
+    write 'Bienvenido al programa de prueba 7. Este programa permitirá hacer diferentes operaciones entre 2 numeros introducidos'; nl;
+    nl;
+   
+    escribeMsg(i);
+    while i != -1 do
+        if i == 1 then
+            read2Real();
+            suma(r1,r2);
+        end;
+        if i == 2 then
+            read2Real();
+            resta(r1,r2);
+        end;
+        if i == 3 then
+           read2Real();
+           mult(r1,r2);
+        end;
+        if i == 4 then
+            read2Int();
+            divEnt(e1,e2);
+        end;
+        if i == 5 then
+            read2Real();
+            divReal(r1,r2);
+        end;
+        if i == 6 then
+            read1Real();
+            inv(r1);
+        end;
+        escribeMsg(i);
+    end;
+end.

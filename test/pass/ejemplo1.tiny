@@ -1,0 +1,46 @@
+
+
+type reg1: record
+    a: string;
+    b: string;
+    c: ^reg;
+end;
+
+type reg: record
+    a: int;
+    b: int;
+    c: reg1;
+end;
+
+var grupos: ^reg;
+var i: int;
+var grupos_aux: ^reg;
+
+begin
+    new grupos;
+    grupos_aux = grupos;
+    i = 0;
+    while i < 20 do
+        grupos_aux^.a = i;
+        grupos_aux^.b = 20+i*3;
+        if grupos_aux^.b < 50 then
+            grupos_aux^.c.a = 'Suspenso';
+        else
+            grupos_aux^.c.a = 'Aprobado';
+        end;
+        grupos_aux^.c.b = 'UCM';
+        i = i + 1;
+        if i < 20 then
+            new grupos_aux^.c.c; @ Alojamos memoria para el siguiente elemento
+            grupos_aux = grupos_aux^.c.c;
+        else
+            grupos_aux^.c.c = null; @ Si no hay que insertar más elementos, el siguiente es null
+        end;
+    end;
+    grupos_aux = grupos;
+    while (grupos_aux != null) do
+        write grupos_aux^.c.a; nl;
+        write grupos_aux^.c.b; nl;
+        grupos_aux = grupos_aux^.c.c;
+    end;
+end.

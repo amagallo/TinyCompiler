@@ -1,0 +1,114 @@
+var miLista: array[7] of boolean;
+var i: integer;
+var resultado: boolean;
+
+proc evalua(var resultado:boolean)
+begin
+    resultado = (miLista[0] and miLista[1]) and ((miLista[2] or miLista[3] or not miLista[4]) and (miLista[5] and miLista[6]));
+end;
+
+proc rellena()
+begin
+    miLista[0] = true;
+    miLista[1] = true;
+    miLista[2] = false;
+    miLista[3] = true;
+    miLista[4] = false;
+    miLista[5] = false;
+    miLista[6] = true;
+end;
+
+proc swap()
+begin
+    aux = miLista[0];
+    miLista[0] = miLista[1];
+    miLista[1] = aux;
+end;
+
+proc despIzq()
+    
+    var i: int;
+    begin
+        i = 0;
+        aux = miLista[0];
+        while i < 6 do
+            miLista[i] = miLista[i + 1];
+            i = i + 1;
+        end;
+        miLista[6] = aux;
+    end;
+
+proc despDer()
+    var aux: bool;
+    var i: int;
+    begin
+        i = 6;
+        aux = miLista[6];
+        while i > 0 do
+            miLista[i] = miLista[i - 1];
+            i = i - 1;
+        end;
+        miLista[0] = aux;
+    end;
+
+
+proc escribeLista()
+    var i: int;
+    begin
+        
+        write 'Formula ----> (Exp1 and Exp2) and ((Exp3 or Exp4 or not Exp5) and (Exp6 and Exp7))'; nl; nl;
+        i = 0;
+        while i < 7 do
+            write 'Elemento ---->';
+            write miLista[i];
+            nl; nl;
+            i = i + 1;
+        end;
+    end;
+
+
+proc escribeMsg(var i: boolean)
+    begin
+        i = -2;
+        while (i < 1) or (i > 5) do
+            write 'Introduzca una accion'; nl;
+            write '1.- Mostrar lista'; nl;
+            write '2.- Intercambiar primer y segundo elemento'; nl;
+            write '3.- Desplazar lista izquierda'; nl;
+            write '4.- Desplazar lista derecha'; nl;
+            write '5.- Adivinar'; nl;
+            read i;
+        end;
+    end;
+
+begin
+ write 'Bienvenido al programa de prueba 5. Este programa consistirá en adivinar cuando se evalua como cierto una formula sobre las expresiones de una lista';
+    nl;
+    escribeMsg(i);
+    rellena();
+    while i != 5 do
+        if i == 1 then
+            escribeLista();
+        end;
+        if i == 2 then
+            swap();
+        end;
+        if i == 3 then
+            despIzq();
+        end;
+        if i == 4 then
+           despDer();
+        end;
+        escribeMsg(i);
+    end;
+
+    evalua(resultado);
+    write 'La expresion se evalua como --->';
+    write resultado; nl; nl;
+    if resultado then
+        write 'Enhorabuena, has ganado';
+    else
+        write 'Has perdido';
+    end;
+    nl;
+end.
