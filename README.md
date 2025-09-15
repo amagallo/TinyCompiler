@@ -16,7 +16,7 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
 
 - **Code generation:**
   - Structured control flow: `if/then[/else]`, `while/do`, `seq`.
-  - Type-safe handling of **basic types**: integers, reals (with automatic **casting** from integers), booleans, strings.
+  - Type-safe handling of **basic types**: integers, reals (with **automatic casting** from integers), booleans, strings.
   - Structured types: arrays, records, pointers with null-checking.
   - Procedure activation and return with support for **by-value / by-reference parameters**.
 
