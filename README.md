@@ -58,10 +58,9 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
   - `/examples/ejemplo.tiny` – Tiny program used as a demo for the project
   - `/examples/out.txt` – Object code generated from the previous Tiny file on the P-code machine
 
-
 ## 📖 References
 
-Dechev D., Pirkelbauer P., Stroustrup B. (2006). *Lock-free Dynamically Resizable Arrays*. [https://doi.org/10.1007/11945529_11](https://doi.org/10.1007/11945529_11)
+Dechev D., Pirkelbauer P., Stroustrup B. (2006). *Lock-free Dynamically Resizable Arrays*. Springer.
 
 Warren H. (2012). *Hacker’s Delight*. Addison-Wesley Professional.
 
