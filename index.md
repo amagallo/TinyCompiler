@@ -1,6 +1,6 @@
 # Tiny Compiler & P-Code Virtual Machine
 
-This site presents a full **compiler toolchain** for **Tiny**, a procedural programming language, along with the **code generation tools** for a custom stack-based **P-code virtual machine**.
+This site presents the repository of a full **compiler toolchain** for **Tiny**, a procedural programming language, along with the **code generation tools** for a custom stack-based **P-code virtual machine**.
 
 ## 🚀 Project Highlights
 - Complete **compilation pipeline**: lexical analysis, parsing, binding, typing, memory assignment, and code generation.  
