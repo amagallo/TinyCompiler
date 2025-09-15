@@ -26,7 +26,7 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
     - Memory operators (`apila`, `desapila`, `mueve`, indirect load/store).
     - Control flow (`ira`, `irf`, `irind`, procedure calls with activation records).
     - I/O (`read`, `write`, `endl`).
-  - **Two-level RAM** (inspired by *Lock-free Dynamically Resizable Arrays*).
+  - **Two-level RAM** (inspired by a concurrent vector implementation).
   - **FAT-style heap manager** for dynamic allocation/deallocation.
   - **Activation records** with control registers and static link display.
   - UTF-8 support for string input/output.
