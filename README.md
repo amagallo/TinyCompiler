@@ -1,6 +1,6 @@
-# Tiny Compiler & Virtual Machine
+# Tiny Compiler & P-Code Virtual Machine
 
-This project implements a full **compiler toolchain** for **Tiny**, a procedural programming language, together with a custom **stack-based virtual machine (P-code machine)** for program execution. It was developed as the final project for the *Language Processors* course.
+This project implements a full **compiler toolchain** for **Tiny**, a procedural programming language, together with a custom **stack-based virtual machine (P-code machine)** for program execution. The project demonstrates both compiler construction techniques and low-level systems programming for stack-based virtual machines.
 
 ## 🚀 Features
 
@@ -20,7 +20,7 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
   - Structured types: arrays, records, pointers with null-checking.
   - Procedure activation and return with support for **by-value / by-reference parameters**.
 
-- **Virtual Machine (P-code):**
+- **Virtual Machine (P-Code):**
   - Instruction Set Architecture (ISA) including:
     - Arithmetic & logical operators (`+`, `-`, `*`, `/`, `%`, `and`, `or`, `not`, comparisons).
     - Memory operators (`apila`, `desapila`, `mueve`, indirect load/store).
@@ -38,12 +38,26 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
 
 ## 📂 Repository Structure
 
-- **Source Code:**
-  - ```/src/alex``` – Lexical definitions (lexical grammar & token generation)
-  - ```/src/asint``` – Syntax & AST definitions (BNF grammar & AST classes)
-  - ```/src/procesamientos``` – Compiler phases (binding, typing, memory, code generation)
-  - ```/src/maquina``` – VM core, P-code ISA, memory management
-  - ```/src/tiny``` – Entry point & exception handling
+- **Documentation**
+  - `/doc/Memoria Parte 1.pdf` – AST nodes & compiler phase specification (report from 1st submission)
+  - `/doc/Memoria Parte 2.pdf` – Lexical & EBNF grammar specification (report from 2nd submission)
+  - `/doc/readme.txt` – User manual for the compiler
+
+- **Source Code**
+  - `/src/alex` – Lexical definitions (token generation & lexical grammar)
+  - `/src/asint` – Syntax & AST definitions (EBNF grammar & AST classes)
+  - `/src/procesamientos` – Compiler phases (binding, typing, memory, code generation)
+  - `/src/maquina` – Virtual machine core, P-code ISA, memory management
+  - `/src/tiny` – Entry point & exception handling
+
+- **Test Artifacts**
+  - `/test/pass` – Valid Tiny code samples
+  - `/test/fail` – Mutated variants of the valid samples
+
+- **Examples**
+  - `/examples/ejemplo.tiny` – Tiny program used as a demo for the project
+  - `/examples/out.txt` – Object code generated from the previous Tiny file on the P-code machine
+
 
 ## 📖 References
 
