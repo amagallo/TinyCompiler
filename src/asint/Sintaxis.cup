@@ -1,0 +1,364 @@
+package asint;
+
+import asint.Sintaxis.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
+
+terminal Strloc PUNTO, BEGIN, END, PUNTO_COMA, VAR, TIPO, PROC, DOS_PUNTOS, COMA, ARRAY, PAPERTURA, PCIERRE,
+    CAPERTURA, CCIERRE, OF, TIPO_BASICO, PUNTERO, REGISTRO, ASIG, IF, THEN, ELSE, WHILE, DO, SEQ, READ, WRITE,
+    NL, NEW, DELETE, NULO, ID, ENTERO, REAL, CADENA, BOOLEANO, OP_RELACIONAL, SUMA, AND, OR, MOD, RESTA, MUL,
+    DIV, NOT;
+
+nonterminal Prog Prog;
+nonterminal List<Dec> SeccionDecs;
+nonterminal List<Ins> SeccionIns;
+nonterminal List<Dec> LDec;
+nonterminal List<Ins> LIns;
+
+nonterminal Dec Dec, DecVar, DecTipo, DecProc;
+
+nonterminal List<Param> PFormales;
+nonterminal List<Param> LParam;
+nonterminal Param PFormal;
+nonterminal Optional<Strloc> VarOpc;
+
+nonterminal Tipo Tipo, TipoBasico, TipoRenombrado, TipoArray, TipoPuntero, TipoRegistro;
+nonterminal List<Campo> LCampo;
+nonterminal Campo Campo;
+nonterminal Ins Ins, Asig, Invoc, Condicional, While, Lectura, Escritura, NewLine, New, Delete, Compuesta; 
+nonterminal Optional<List<Ins>> ElseOpc;
+nonterminal Optional<Strloc> PuntoComaOpc;
+
+nonterminal List<Exp> PReales, LReal;
+nonterminal Exp PReal, Expresion, ExpBasica, ExpNivel0;
+    
+nonterminal Exp ExpBinaria0, ExpNivel1, MasBinario, MenosBinario, ExpNivel2, ExpNivel3, ExpBinaria3, ExpNivel4;
+nonterminal Exp And, Or, ExpUnaria4, ExpNivel5, ExpPosfija, ExpParentizada, Indx, Indir, Acc;
+
+start with Prog;
+
+Prog ::= SeccionDecs:decs SeccionIns:ins PUNTO
+{: RESULT = new Prog(decs, ins, new Nodo(1, 1)); :};
+
+SeccionDecs ::= LDec:ldec
+{: RESULT = Collections.unmodifiableList(ldec); :};
+
+LDec ::= 
+{: RESULT = new ArrayList<Dec>(); :}
+| LDec:ldec Dec:dec PUNTO_COMA
+{:
+    ldec.add(dec);
+    RESULT = ldec;
+:};
+
+SeccionIns ::= BEGIN LIns:lins END
+{: RESULT = Collections.unmodifiableList(lins); :};
+
+LIns ::= 
+{: RESULT = new ArrayList<Ins>(); :}
+| LIns:lins Ins:ins
+{:
+    lins.add(ins);
+    RESULT = lins;
+:};
+
+Dec ::= DecVar:dec
+{: RESULT = dec; :}
+| DecTipo:dec
+{: RESULT = dec; :}
+| DecProc:dec
+{: RESULT = dec; :};
+
+DecVar ::= VAR:var ID:id DOS_PUNTOS Tipo:tipo
+{: RESULT = new Var(id.str(), tipo, new Nodo(var.linea(), var.col())); :};
+
+DecTipo ::= TIPO:type ID:id DOS_PUNTOS Tipo:tipo
+{: RESULT = new Type(id.str(), tipo, new Nodo(type.linea(), type.col())); :};
+
+DecProc ::= PROC:proc ID:id PAPERTURA PFormales:pformales PCIERRE SeccionDecs:decs SeccionIns:ins
+{: RESULT = new Proc(id.str(), pformales, decs, ins, new Nodo(proc.linea(), proc.col())); :};
+
+PFormales ::=
+{: RESULT = List.of(); :}
+| LParam:lparam PFormal:param
+{:
+    lparam.add(param);
+    RESULT = Collections.unmodifiableList(lparam);
+:};
+
+LParam ::=
+{: RESULT = new ArrayList<Param>(); :}
+| LParam:lparam PFormal:param COMA
+{:
+    lparam.add(param);
+    RESULT = lparam;
+:};
+
+PFormal ::= VarOpc:var ID:id DOS_PUNTOS Tipo:tipo
+{:
+    RESULT = var.isPresent()? new Pvar(id.str(), tipo, new Nodo(var.get().linea(), var.get().col())):
+        new Pval(id.str(), tipo, new Nodo(id.linea(), id.col()));
+:};
+
+VarOpc ::=
+{: RESULT = Optional.empty(); :}
+| VAR:var
+{: RESULT = Optional.of(var); :};
+
+Tipo ::= TipoBasico:tipo
+{: RESULT = tipo; :}
+| TipoRenombrado:tipo
+{: RESULT = tipo; :}
+| TipoArray:tipo
+{: RESULT = tipo; :}
+| TipoRegistro:tipo
+{: RESULT = tipo; :}
+| TipoPuntero:tipo
+{: RESULT = tipo; :};
+
+TipoBasico ::= TIPO_BASICO:tipo
+{:
+    Nodo nodo = new Nodo(tipo.linea(), tipo.col());
+    RESULT = switch (tipo.str())
+    {
+        case "int" -> new Int(nodo);
+        case "real" -> new Real(nodo);
+        case "bool" -> new Bool(nodo);
+        default -> new Str(nodo); /* case "string" */
+    };
+:};
+
+TipoRenombrado ::= ID:id
+{: RESULT = new Ref(id.str(), new Nodo(id.linea(), id.col())); :};
+
+TipoArray ::= ARRAY:array CAPERTURA ENTERO:tam CCIERRE OF Tipo:base
+{: RESULT = new Array(base, tam.str(), new Nodo(array.linea(), array.col())); :};
+
+TipoPuntero ::= PUNTERO:punt Tipo:base
+{: RESULT = new Puntero(base, new Nodo(punt.linea(), punt.col())); :};
+
+TipoRegistro ::= REGISTRO:reg LCampo:lcampo END
+{: RESULT = new Reg(Collections.unmodifiableList(lcampo), new Nodo(reg.linea(), reg.col())); :};
+
+LCampo ::= Campo:campo
+{:
+    List<Campo> lcampo = new ArrayList<Campo>();
+    lcampo.add(campo);
+    RESULT = lcampo;
+:}
+| Campo:campo LCampo:lcampo
+{:
+    lcampo.add(campo);
+    RESULT = lcampo;
+:};
+
+Campo ::= ID:id DOS_PUNTOS Tipo:tipo PUNTO_COMA
+{: RESULT = new Campo(id.str(), tipo, new Nodo(id.linea(), id.col())); :};
+
+Ins ::= Asig:ins
+{: RESULT = ins; :}
+| Invoc:ins
+{: RESULT = ins; :}
+| Condicional:ins
+{: RESULT = ins; :}
+| While:ins
+{: RESULT = ins; :}
+| Lectura:ins
+{: RESULT = ins; :}
+| Escritura:ins
+{: RESULT = ins; :}
+| NewLine:ins
+{: RESULT = ins; :}
+| New:ins
+{: RESULT = ins; :}
+| Delete:ins
+{: RESULT = ins; :}
+| Compuesta:ins
+{: RESULT = ins; :};
+
+Asig ::= Expresion:ei ASIG:asig Expresion:ed PUNTO_COMA
+{: RESULT = new Asig(ei, ed, new Nodo(asig.linea(), asig.col())); :};
+
+Invoc ::= Expresion:eid PAPERTURA:parentesis PReales:preales PCIERRE PUNTO_COMA
+{: RESULT = new Invoc(eid, preales, new Nodo(parentesis.linea(), parentesis.col())); :};
+
+Condicional ::= IF:i Expresion:exp THEN LIns:lins ElseOpc:lins2 END PuntoComaOpc
+{:
+    Nodo nodo = new Nodo(i.linea(), i.col());
+    List<Ins> linsInmutable = Collections.unmodifiableList(lins);
+    RESULT =
+        lins2.isPresent()? new IfThenElse(exp, linsInmutable, Collections.unmodifiableList(lins2.get()), nodo):
+        new IfThen(exp, linsInmutable, nodo);
+:};
+
+ElseOpc ::=
+{: RESULT = Optional.empty(); :}
+| ELSE LIns:lins
+{: RESULT = Optional.of(lins); :};
+
+While ::= WHILE:wh Expresion:exp DO LIns:lins END PuntoComaOpc
+{: RESULT = new While(exp, Collections.unmodifiableList(lins), new Nodo(wh.linea(), wh.col())); :};
+
+PuntoComaOpc ::=
+{: RESULT = Optional.empty(); :}
+| PUNTO_COMA:puntoComa
+{: RESULT = Optional.of(puntoComa); :};
+
+Compuesta ::= SEQ:seq SeccionDecs:decs SeccionIns:ins PuntoComaOpc
+{: RESULT = new Seq(decs, ins, new Nodo(seq.linea(), seq.col())); :};
+
+Lectura ::= READ:read Expresion:exp PUNTO_COMA
+{: RESULT = new Read(exp, new Nodo(read.linea(), read.col())); :};
+
+Escritura ::= WRITE:write Expresion:exp PUNTO_COMA
+{: RESULT = new Write(exp, new Nodo(write.linea(), write.col())); :};
+
+NewLine ::= NL:nl PUNTO_COMA
+{: RESULT = new NewLine(new Nodo(nl.linea(), nl.col())); :};
+
+New ::= NEW:n Expresion:exp PUNTO_COMA
+{: RESULT = new New(exp, new Nodo(n.linea(), n.col())); :};
+
+Delete ::= DELETE:d Expresion:exp PUNTO_COMA
+{: RESULT = new Delete(exp, new Nodo(d.linea(), d.col())); :};
+
+PReales ::=
+{: RESULT = List.of(); :}
+| LReal:lexp PReal:preal
+{:
+    lexp.add(preal);
+    RESULT = Collections.unmodifiableList(lexp);
+:};
+
+LReal ::=
+{: RESULT = new ArrayList<Exp>(); :}
+| LReal:lexp PReal:preal COMA
+{:
+    lexp.add(preal);
+    RESULT = lexp;
+:};
+
+PReal ::= Expresion:exp
+{: RESULT = exp; :};
+
+Expresion ::= ExpNivel0:exp
+{: RESULT = exp; :};
+
+ExpNivel0 ::= ExpBinaria0:exp
+{: RESULT = exp; :}
+| ExpNivel1:exp
+{: RESULT = exp; :};
+
+ExpBinaria0 ::= ExpNivel1:op0 OP_RELACIONAL:op ExpNivel1:op1
+{:
+    Nodo nodo = new Nodo(op.linea(), op.col());
+
+    RESULT = switch (op.str())
+    {
+        case "==" -> new Eq(op0, op1, nodo);
+        case "!=" -> new Ne(op0, op1, nodo);
+        case "<=" -> new Le(op0, op1, nodo);
+        case ">=" -> new Ge(op0, op1, nodo);
+        case "<" -> new Lt(op0, op1, nodo);
+        default -> new Gt(op0, op1, nodo); /* case ">" */
+    };
+:};
+
+ExpNivel1 ::= MasBinario:exp
+{: RESULT = exp; :}
+| MenosBinario:exp
+{: RESULT = exp; :}
+| ExpNivel2:exp
+{: RESULT = exp; :};
+
+MasBinario ::= ExpNivel2:op0 SUMA:suma ExpNivel2:op1
+{: RESULT = new Suma(op0, op1, new Nodo(suma.linea(), suma.col())); :};
+
+MenosBinario ::= ExpNivel1:op0 RESTA:resta ExpNivel2:op1
+{: RESULT = new Resta(op0, op1, new Nodo(resta.linea(), resta.col())); :};
+
+ExpNivel2 ::= And:exp
+{: RESULT = exp; :}
+| Or:exp
+{: RESULT = exp; :}
+| ExpNivel3:exp
+{: RESULT = exp; :};
+
+And ::= ExpNivel3:op0 AND:and ExpNivel3:op1
+{: RESULT = new And(op0, op1, new Nodo(and.linea(), and.col())); :};
+
+Or ::= ExpNivel3:op0 OR:or ExpNivel2:op1
+{: RESULT = new Or(op0, op1, new Nodo(or.linea(), or.col())); :};
+
+ExpNivel3 ::= ExpBinaria3:exp
+{: RESULT = exp; :}
+| ExpNivel4:exp
+{: RESULT = exp; :};
+
+ExpBinaria3 ::= ExpNivel3:op0 MUL:mul ExpNivel4:op1
+{: RESULT = new Mul(op0, op1, new Nodo(mul.linea(), mul.col())); :}
+| ExpNivel3:op0 DIV:div ExpNivel4:op1
+{: RESULT = new Div(op0, op1, new Nodo(div.linea(), div.col())); :}
+| ExpNivel3:op0 MOD:mod ExpNivel4:op1
+{: RESULT = new Mod(op0, op1, new Nodo(mod.linea(), mod.col())); :};
+
+ExpNivel4 ::= ExpUnaria4:exp
+{: RESULT = exp; :}
+| ExpNivel5:exp
+{: RESULT = exp; :};
+
+ExpUnaria4 ::= RESTA:resta ExpNivel5:op
+{: RESULT = new Neg(op, new Nodo(resta.linea(), resta.col())); :}
+| NOT:not ExpNivel5:op
+{: RESULT = new Not(op, new Nodo(not.linea(), not.col())); :};
+
+ExpNivel5 ::= ExpParentizada:exp
+{: RESULT = exp; :}
+| ExpPosfija:exp
+{: RESULT = exp; :}
+| ExpBasica:exp
+{: RESULT = exp; :};
+
+ExpBasica ::= ENTERO:lit
+{: RESULT = new Entero(lit.str(), new Nodo(lit.linea(), lit.col())); :}
+| REAL:lit
+{: RESULT = new Decimal(lit.str(), new Nodo(lit.linea(), lit.col())); :}
+| CADENA:lit
+{:
+    String str = lit.str();
+    RESULT = new Cadena(str.substring(1, str.length() - 1), new Nodo(lit.linea(), lit.col()));
+:}
+| ID:lit
+{: RESULT = new Ident(lit.str(), new Nodo(lit.linea(), lit.col())); :}
+| BOOLEANO:lit
+{:
+    Nodo nodo = new Nodo(lit.linea(), lit.col());
+    RESULT = switch (lit.str())
+    {
+        case "true" -> new True(nodo);
+        default -> new False(nodo); /* case "false" */
+    };
+:}
+| NULO:lit
+{: RESULT = new Nulo(new Nodo(lit.linea(), lit.col())); :};
+
+ExpParentizada ::= PAPERTURA ExpNivel0:exp PCIERRE
+{: RESULT = exp; :};
+
+ExpPosfija ::= Indx:exp
+{: RESULT = exp; :}
+| Acc:exp
+{: RESULT = exp; :}
+| Indir:exp
+{: RESULT = exp; :};
+
+Indx ::= ExpNivel5:eid CAPERTURA:corchete Expresion:ei CCIERRE
+{: RESULT = new Indx(eid, ei, new Nodo(corchete.linea(), corchete.col())); :};
+
+Acc ::= ExpNivel5:eid PUNTO:punto ID:id
+{: RESULT = new Acc(eid, id.str(), new Nodo(punto.linea(), punto.col())); :};
+
+Indir ::= ExpNivel5:et PUNTERO:indir
+{: RESULT = new Indir(et, new Nodo(indir.linea(), indir.col())); :};
