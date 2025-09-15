@@ -1,4 +1,4 @@
-# Tiny Compiler & P-Code Virtual Machine
+# Tiny Compiler & Virtual Machine
 
 This project implements a full **compiler toolchain** for **Tiny**, a procedural programming language, together with a custom **stack-based virtual machine (P-code machine)** for program execution. The project demonstrates both compiler construction techniques and low-level systems programming for stack-based virtual machines.
 
