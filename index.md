@@ -1,8 +1,6 @@
 # Tiny Compiler & P-Code Virtual Machine
 
-Welcome! 👋  
-This site presents the final project for the *Language Processors* course:  
-a full **compiler toolchain** for the **Tiny** procedural language, together with a custom **stack-based P-code virtual machine**.
+**Welcome!** 👋 This project implements a full **compiler toolchain** for **Tiny**, a procedural programming language, together with a custom **stack-based virtual machine (P-code machine)** for program execution. The project demonstrates both compiler construction techniques and low-level systems programming for stack-based virtual machines.
 
 ## 🚀 Project Highlights
 - Complete compilation pipeline: lexical analysis, parsing, binding, typing, memory assignment, and code generation.  
