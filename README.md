@@ -38,15 +38,12 @@ This project implements a full **compiler toolchain** for **Tiny**, a procedural
 
 ## 📂 Repository Structure
 
-```/src/alex``` – Lexical definitions (lexical grammar & token generation)
-
-```/src/asint``` – Syntax & AST definitions (BNF grammar & AST classes)
-
-```/src/procesamientos``` – Compiler phases (binding, typing, memory, code generation)
-
-```/src/maquina``` – VM core, P-code ISA, memory management
-
-```/src/tiny``` – Entry point & exception handling
+- **Source Code:**
+  - ```/src/alex``` – Lexical definitions (lexical grammar & token generation)
+  - ```/src/asint``` – Syntax & AST definitions (BNF grammar & AST classes)
+  - ```/src/procesamientos``` – Compiler phases (binding, typing, memory, code generation)
+  - ```/src/maquina``` – VM core, P-code ISA, memory management
+  - ```/src/tiny``` – Entry point & exception handling
 
 ## 📖 References
 
