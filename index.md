@@ -13,7 +13,7 @@ a full **compiler toolchain** for the **Tiny** procedural language, together wit
 
 ## 📂 Repository
 You can find the full source code, documentation, and examples here:  
-👉 [GitHub Repository](https://github.com/TU_USUARIO/NOMBRE_DEL_REPO)
+👉 [GitHub Repository](https://github.com/amagallo/tiny-compiler)
 
 ## 📝 License
 This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.  
